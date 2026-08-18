@@ -35,7 +35,7 @@ sequenceDiagram
     F->>XL: Target = Country + envelope
     XL->>WB: Add a row × 5 → CountryResults
     XL-->>F: success { inserted, target, table }
-    F->>F: start += 5 ; end += 5
+    F->>F: advance window (start += 5, end += 5)
     Note over F: loop until start ≥ total rule count
 ```
 
