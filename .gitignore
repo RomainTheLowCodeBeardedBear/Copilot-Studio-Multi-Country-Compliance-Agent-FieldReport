@@ -1,0 +1,23 @@
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# Temp / build
+*.tmp
+*.log
+~$*
+*.bak
+
+# Python
+__pycache__/
+*.pyc
+
+# Never commit sample data, client documents, or exports
+data/
+samples/
+*.csv
+*.xlsx
+*.docx

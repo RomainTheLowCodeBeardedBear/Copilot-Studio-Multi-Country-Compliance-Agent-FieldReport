@@ -1,0 +1,24 @@
+%% One loop iteration (5 rules) — the flow drives every step
+sequenceDiagram
+    autonumber
+    participant F as Agent Flow (owns pagination)
+    participant X as Extractor
+    participant AI as Internal Analyst
+    participant AC as Country Analyst
+    participant XL as InsertXls
+    participant WB as Excel Workbook
+
+    F->>X: PAGE(pack, country, from, to)
+    X-->>F: stable 5-rule JSON (fixed sort)
+    F->>AI: contract URL + audit name + page JSON
+    AI-->>F: Internal envelope (built & validated by scripts)
+    F->>XL: Target = Internal + envelope
+    XL->>WB: Add a row x5 → InternalResults
+    XL-->>F: success { inserted, target, table }
+    F->>AC: contract URL + audit name + same page JSON
+    AC-->>F: Country envelope (targeted research if relevant)
+    F->>XL: Target = Country + envelope
+    XL->>WB: Add a row x5 → CountryResults
+    XL-->>F: success { inserted, target, table }
+    F->>F: start += 5 ; end += 5
+    Note over F: loop until start >= total rule count

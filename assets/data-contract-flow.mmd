@@ -1,0 +1,11 @@
+%% Deterministic output pattern — model judges, scripts build the envelope
+flowchart LR
+    subgraph M["Model — judgement only"]
+      J["one minimal verdict per rule<br/>(status, evidence, analysis, confidence, remediation)"]
+    end
+    subgraph S["Scripts — deterministic structure"]
+      V["validate verdicts"] --> B["build envelope<br/>copy metadata from page.json + inputs"] --> VE["validate full envelope"]
+    end
+    J --> V
+    VE --> OUT[/"validated final JSON"/]
+    OUT --> INS["emit verbatim → InsertXls"]
